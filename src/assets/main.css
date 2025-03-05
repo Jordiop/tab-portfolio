@@ -1,0 +1,302 @@
+@import "tailwindcss";
+
+:root {
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #2f2d36;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.sidebar {
+  width: 50px;
+  background-color: #1f1f21;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  border-right: 1px solid #2a2438;
+}
+
+.sidebar-icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 20px;
+  color: #6e6a86;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-icon:hover, .sidebar-icon.active {
+  color: #e0def4;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-bar {
+  height: 40px;
+  background-color: #1f1f21;
+  display: flex;
+  border-bottom: 1px solid #2a2438;
+}
+
+.tab {
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  color: #6e6a86;
+  border-right: 1px solid #2a2438;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.tab.active {
+  color: #e0def4;
+  background-color: #13111c;
+}
+
+.content-area {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.code-editor {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.line-numbers {
+  width: 50px;
+  text-align: right;
+  padding: 20px 10px 20px 0;
+  color: #6e6a86;
+  user-select: none;
+  font-size: 14px;
+}
+
+.code-content {
+  flex: 1;
+  padding: 20px 0;
+  font-size: 14px;
+}
+
+.code-line {
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.code-text {
+  padding-left: 15px;
+}
+
+.keyword {
+  color: #c4a7e7;
+}
+
+.string {
+  color: #f6c177;
+}
+
+.comment {
+  color: #6e6a86;
+}
+
+.function {
+  color: #9ccfd8;
+}
+
+.variable {
+  color: #e0def4;
+}
+
+.preview {
+  flex: 1;
+  background-color: #13111c;
+  padding: 20px;
+  border-left: 1px solid #2a2438;
+  overflow-y: auto;
+}
+
+.hero-section {
+  padding: 40px;
+  height: 100%;
+}
+
+.greeting {
+  font-size: 18px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.hand-emoji {
+  margin-left: 10px;
+  font-size: 24px;
+}
+
+.name {
+  font-size: 80px;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1;
+}
+
+.tagline {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.highlight {
+  color: #c4a7e7;
+}
+
+.highlight-react {
+  color: #9ccfd8;
+}
+
+.highlight-ai {
+  color: #f6c177;
+}
+
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: 1px solid #6e6a86;
+  border-radius: 4px;
+  background: transparent;
+  color: #e0def4;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color: rgba(110, 106, 134, 0.2);
+}
+
+.btn-primary {
+  background-color: #c4a7e7;
+  color: #13111c;
+  border-color: #c4a7e7;
+}
+
+.btn-primary:hover {
+  background-color: #b393dd;
+  border-color: #b393dd;
+}
+
+@media (max-width: 768px) {
+  .content-area {
+    flex-direction: column;
+  }
+  
+  .name {
+    font-size: 50px;
+  }
+}
+
+/* Add to main.css to improve the code editor layout */
+
+.code-editor {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #2f2d36;
+  border-right: 1px solid #2a2438;
+}
+
+.code-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.code-line {
+  display: flex;
+  height: 24px;
+  line-height: 24px;
+  margin-bottom: 2px;
+  width: 100%;
+}
+
+.line-numbers {
+  width: 50px;
+  min-width: 50px;
+  text-align: right;
+  padding-right: 10px;
+  color: #6e6a86;
+  user-select: none;
+  font-size: 14px;
+}
+
+.code-text {
+  padding-left: 15px;
+  color: #e0def4;
+  font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  white-space: pre;
+}
+
+.content-area {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  height: calc(100vh - 40px);
+}
+
+/* Ensure the preview stays fixed at 50% width on larger screens */
+@media (min-width: 768px) {
+  .code-editor, .preview {
+    width: 50%;
+    flex: 0 0 50%;
+  }
+}
+
+/* Improve scrolling behavior in code editor */
+.code-editor::-webkit-scrollbar {
+  width: 8px;
+}
+
+.code-editor::-webkit-scrollbar-track {
+  background: #2a2438;
+}
+
+.code-editor::-webkit-scrollbar-thumb {
+  background: #6e6a86;
+  border-radius: 4px;
+}
+
+.code-editor::-webkit-scrollbar-thumb:hover {
+  background: #9ccfd8;
+}
