@@ -1,33 +1,91 @@
 <script setup lang="ts">
-const codeLines = [
-  { num: 1, content: '// Welcome to my Portfolio! 🚀', class: 'comment' },
-  { num: 2, content: '<template>', class: '' },
-  { num: 3, content: '    <div class="about">', class: '' },
-  { num: 4, content: '      <h2>About Me</h2>', class: '' },
-  { num: 5, content: '      <p>I\'m a passionate developer specializing in modern web technologies.</p>', class: '' },
-  { num: 6, content: '      <p>With expertise in Vue, Nuxt JS, and learning AI integration, I build efficient and scalable applications.</p>', class: '' },
-  { num: 7, content: '      <h3>Skills</h3>', class: '' },
-  { num: 8, content: '      <ul>', class: '' },
-  { num: 9, content: '        <li>Vue & Nuxt JS</li>', class: '' },
-  { num: 10, content: '        <li>TypeScript</li>', class: '' },
-  { num: 11, content: '        <li>AI Integration</li>', class: '' },
-  { num: 12, content: '        <li>Tailwind CSS</li>', class: '' },
-  { num: 13, content: '        <li>Responsive Design</li>', class: '' },
-  { num: 14, content: '      </ul>', class: '' },
-  { num: 15, content: '      <h3>Experience</h3>', class: '' },
-  { num: 16, content: '      <p>Over 2 years of experience in web development.</p>', class: '' },
-  { num: 17, content: '    </div>', class: '' },
-  { num: 18, content: '</template>', class: '' },
+import { ref, onMounted } from 'vue'
+
+const codeLines: Array<{ num: number; content: string; class: string }> = [
+  { num: 1, content: '// About.vue - Developer Profile', class: 'comment' },
+  { num: 2, content: '< setup lang="ts">', class: 'keyword' },
+  { num: 3, content: 'import { ref, onMounted } from \'vue\'', class: 'keyword' },
+  { num: 4, content: '', class: '' },
+  { num: 5, content: 'const skills = [', class: 'variable' },
+  { num: 6, content: '  { name: "Vue.js", level: 90 },', class: 'string' },
+  { num: 7, content: '  { name: "TypeScript", level: 85 },', class: 'string' },
+  { num: 8, content: '  { name: "Nuxt.js", level: 80 },', class: 'string' },
+  { num: 9, content: '  { name: "Tailwind CSS", level: 85 },', class: 'string' },
+  { num: 10, content: '  { name: "Node.js", level: 75 },', class: 'string' },
+  { num: 11, content: '  { name: "PostgreSQL", level: 70 },', class: 'string' },
+  { num: 12, content: ']', class: 'punctuation' },
+  { num: 13, content: '', class: '' },
+  { num: 14, content: 'const experience = [', class: 'variable' },
+  { num: 15, content: '  {', class: 'punctuation' },
+  { num: 16, content: '    company: "Tech Company",', class: 'string' },
+  { num: 17, content: '    role: "Full Stack Developer",', class: 'string' },
+  { num: 18, content: '    duration: "2022 - Present",', class: 'string' },
+  { num: 19, content: '    description: "Building modern web applications"', class: 'string' },
+  { num: 20, content: '  }', class: 'punctuation' },
+  { num: 21, content: ']', class: 'punctuation' },
+  { num: 22, content: '</>', class: 'keyword' },
+  { num: 23, content: '', class: '' },
+  { num: 24, content: '<template>', class: 'keyword' },
+  { num: 25, content: '  <div class="about-section">', class: 'punctuation' },
+  { num: 26, content: '    <h1>About Me</h1>', class: 'string' },
+  { num: 27, content: '    <p>{{ bio }}</p>', class: 'string' },
+  { num: 28, content: '    <SkillsChart :skills="skills" />', class: 'string' },
+  { num: 29, content: '    <ExperienceTimeline :experience="experience" />', class: 'string' },
+  { num: 30, content: '  </div>', class: 'punctuation' },
+  { num: 31, content: '</template>', class: 'keyword' }
 ];
 
-const getCodeClasses = (line: any) => {
-  const baseClass = line.class || '';
-  if (line.num === 1) return ['comment'];
-  else if (line.num === 2) return ['has-imports'];
-  else if (line.num === 4) return ['declaration'];
-  else if (line.num >= 6 && line.num <= 20) return ['jsx-syntax'];
-  return [baseClass];
-};
+const skills = [
+  { name: "Vue.js", level: 90, color: "#42b883" },
+  { name: "TypeScript", level: 85, color: "#3178c6" },
+  { name: "Nuxt.js", level: 80, color: "#00dc82" },
+  { name: "Tailwind CSS", level: 85, color: "#06b6d4" },
+  { name: "Node.js", level: 75, color: "#339933" },
+  { name: "PostgreSQL", level: 70, color: "#336791" },
+  { name: "Git", level: 85, color: "#f05032" },
+  { name: "Docker", level: 65, color: "#2496ed" }
+];
+
+const experience = [
+  {
+    company: "Tech Solutions Inc.",
+    role: "Senior Full Stack Developer",
+    duration: "2023 - Present",
+    description: "Leading development of enterprise web applications using Vue.js, TypeScript, and Node.js. Mentoring junior developers and implementing best practices.",
+    technologies: ["Vue.js", "TypeScript", "Node.js", "PostgreSQL", "Docker"]
+  },
+  {
+    company: "StartupXYZ",
+    role: "Frontend Developer",
+    duration: "2022 - 2023",
+    description: "Built responsive web applications and improved user experience. Collaborated with design and backend teams to deliver high-quality products.",
+    technologies: ["Vue.js", "Nuxt.js", "Tailwind CSS", "JavaScript"]
+  },
+  {
+    company: "Freelance",
+    role: "Web Developer",
+    duration: "2021 - 2022",
+    description: "Developed custom websites and web applications for various clients. Managed projects from conception to deployment.",
+    technologies: ["HTML", "CSS", "JavaScript", "Vue.js", "WordPress"]
+  }
+];
+
+const education = [
+  {
+    degree: "Bachelor of Computer Science",
+    institution: "University of Technology",
+    duration: "2018 - 2022",
+    description: "Focused on software engineering, algorithms, and web development."
+  }
+];
+
+const isVisible = ref(false);
+
+onMounted(() => {
+  setTimeout(() => {
+    isVisible.value = true;
+  }, 100);
+});
 </script>
 
 <template>
@@ -35,31 +93,343 @@ const getCodeClasses = (line: any) => {
     <div class="code-content">
       <div class="code-line" v-for="line in codeLines" :key="line.num">
         <div class="line-numbers">{{ line.num }}</div>
-        <div class="code-text" :class="getCodeClasses(line)">
+        <div class="code-text" :class="line.class">
           {{ line.content }}
         </div>
       </div>
     </div>
   </div>
   <div class="preview">
-    <div style="padding: 40px;">
-      <h1>About Me</h1>
-      <p>I'm a passionate developer specializing in modern web technologies.</p>
-      <p>With expertise in Vue, Nuxt JS, and learning AI integration, I build efficient and scalable applications.</p>
-      
-      <h3>Skills</h3>
-      <ul>
-        <li>Vue & Nuxt JS</li>
-        <li>TypeScript</li>
-        <li>AI Integration</li>
-        <li>Tailwind CSS</li>
-        <li>Vuetify</li>
-        <li>Node.js</li>
-        <li>Responsive Design</li>
-      </ul>
-      
-      <h3>Experience</h3>
-      <p>Over 2 years of experience in web development, working with established companies delivering high-quality solutions.</p>
+    <div class="about-content" :class="{ 'visible': isVisible }">
+      <div class="about-header">
+        <h1>About Me</h1>
+        <p class="bio">
+          I'm a passionate Full Stack Developer with over 2 years of experience building modern web applications. 
+          I specialize in Vue.js, TypeScript, and Node.js, creating efficient and scalable solutions that deliver 
+          exceptional user experiences.
+        </p>
+        <p class="bio">
+          When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, 
+          or sharing knowledge with the developer community. I believe in writing clean, maintainable code and 
+          staying up-to-date with the latest industry trends.
+        </p>
+      </div>
+
+      <div class="skills-section">
+        <h2>Skills & Technologies</h2>
+        <div class="skills-grid">
+          <div v-for="skill in skills" :key="skill.name" class="skill-item">
+            <div class="skill-header">
+              <span class="skill-name">{{ skill.name }}</span>
+              <span class="skill-level">{{ skill.level }}%</span>
+            </div>
+            <div class="skill-bar">
+              <div 
+                class="skill-progress" 
+                :style="{ 
+                  width: skill.level + '%', 
+                  backgroundColor: skill.color 
+                }"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="experience-section">
+        <h2>Experience</h2>
+        <div class="timeline">
+          <div v-for="(exp, index) in experience" :key="index" class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <h3>{{ exp.role }}</h3>
+                <span class="company">{{ exp.company }}</span>
+                <span class="duration">{{ exp.duration }}</span>
+              </div>
+              <p class="timeline-description">{{ exp.description }}</p>
+              <div class="technologies">
+                <span v-for="tech in exp.technologies" :key="tech" class="tech-badge">
+                  {{ tech }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="education-section">
+        <h2>Education</h2>
+        <div class="education-item">
+          <div class="education-header">
+            <h3>{{ education[0].degree }}</h3>
+            <span class="institution">{{ education[0].institution }}</span>
+            <span class="duration">{{ education[0].duration }}</span>
+          </div>
+          <p>{{ education[0].description }}</p>
+        </div>
+      </div>
+
+      <div class="interests-section">
+        <h2>Interests & Hobbies</h2>
+        <div class="interests-grid">
+          <div class="interest-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            <span>Open Source</span>
+          </div>
+          <div class="interest-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <span>Learning New Tech</span>
+          </div>
+          <div class="interest-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span>Community</span>
+          </div>
+          <div class="interest-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13,2 3,14 12,14 11,22 21,10 12,10 13,2"></polygon>
+            </svg>
+            <span>Problem Solving</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+.about-content {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.about-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-header {
+  margin-bottom: 3rem;
+}
+
+.bio {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+}
+
+.skills-section,
+.experience-section,
+.education-section,
+.interests-section {
+  margin-bottom: 3rem;
+}
+
+.skills-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.skill-item {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.skill-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.skill-level {
+  font-size: 0.875rem;
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
+.skill-bar {
+  height: 8px;
+  background: var(--bg-primary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.skill-progress {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease;
+}
+
+.timeline {
+  position: relative;
+  margin-top: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-color);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 60px;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: 11px;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  border: 4px solid var(--bg-primary);
+}
+
+.timeline-content {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.timeline-header {
+  margin-bottom: 1rem;
+}
+
+.timeline-header h3 {
+  color: var(--accent-color);
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+}
+
+.company {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-right: 1rem;
+}
+
+.duration {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.timeline-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-badge {
+  background: var(--bg-primary);
+  color: var(--accent-secondary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  border: 1px solid var(--border-color);
+}
+
+.education-item {
+  background: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  margin-top: 1.5rem;
+}
+
+.education-header {
+  margin-bottom: 1rem;
+}
+
+.education-header h3 {
+  color: var(--accent-color);
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+}
+
+.institution {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-right: 1rem;
+}
+
+.interests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.interest-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--bg-secondary);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.interest-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-light);
+  border-color: var(--accent-color);
+}
+
+.interest-item svg {
+  color: var(--accent-color);
+}
+
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 15px;
+  }
+  
+  .timeline-item {
+    padding-left: 50px;
+  }
+  
+  .timeline-marker {
+    left: 6px;
+    width: 18px;
+    height: 18px;
+  }
+  
+  .interests-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
