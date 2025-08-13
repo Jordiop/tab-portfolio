@@ -78,7 +78,7 @@ const typeWriter = () => {
         <span v-if="isTyping">{{ typedText }}<span class="cursor">|</span></span>
         <span v-else>{{ fullText }}</span>
       </h1>
-      <div class="tagline">
+      <div class="tagline mb-4">
         I Fix, Optimize & Build 
         <span class="highlight">Nuxt.js</span> & 
         <span class="highlight-react">Vue.js</span> Apps
@@ -142,11 +142,11 @@ const typeWriter = () => {
   position: relative;
   width: 250px;
   height: 250px;
-  margin-top: 2rem;
-  border-radius: 16px;
+  border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--shadow-medium);
   transition: all 0.3s ease;
+  margin-top: 1rem;
 }
 
 .developer-image-container:hover {

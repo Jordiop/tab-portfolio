@@ -398,7 +398,6 @@ body {
   width: 100%;
   height: auto;
   border-radius: 16px;
-  margin-top: 2rem;
   box-shadow: var(--shadow-medium);
   transition: all 0.3s ease;
   animation: fadeInUp 0.8s ease 0.8s both;

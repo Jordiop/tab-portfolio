@@ -48,34 +48,33 @@ const skills = [
 
 const experience = [
   {
-    company: "Tech Solutions Inc.",
-    role: "Senior Full Stack Developer",
-    duration: "2023 - Present",
-    description: "Leading development of enterprise web applications using Vue.js, TypeScript, and Node.js. Mentoring junior developers and implementing best practices.",
-    technologies: ["Vue.js", "TypeScript", "Node.js", "PostgreSQL", "Docker"]
+    company: "Omniaccess",
+    role: "Full Stack Developer",
+    duration: "January 2025 - Present",
+    description: "Following my previous experience, I'm working on projects using Nuxt and Vuetify and collaborating with the design team to deliver high-quality products.",
+    technologies: ["Nuxt.js", "Vuetify", "TypeScript", "Node.js", "PostgreSQL", "Docker", "Python"]
   },
   {
-    company: "StartupXYZ",
-    role: "Frontend Developer",
-    duration: "2022 - 2023",
-    description: "Built responsive web applications and improved user experience. Collaborated with design and backend teams to deliver high-quality products.",
+    company: "Omniaccess",
+    role: "Junior Full Stack Developer",
+    duration: "June 2023 - December 2024",
+    description: "Maintain and improve existing web applications using Vue.js, and Tailwind CSS. Developed a customer portal for a company client.",
     technologies: ["Vue.js", "Nuxt.js", "Tailwind CSS", "JavaScript"]
-  },
-  {
-    company: "Freelance",
-    role: "Web Developer",
-    duration: "2021 - 2022",
-    description: "Developed custom websites and web applications for various clients. Managed projects from conception to deployment.",
-    technologies: ["HTML", "CSS", "JavaScript", "Vue.js", "WordPress"]
   }
 ];
 
 const education = [
   {
-    degree: "Bachelor of Computer Science",
-    institution: "University of Technology",
-    duration: "2018 - 2022",
-    description: "Focused on software engineering, algorithms, and web development."
+    degree: "Big data and artificial intelligence",
+    institution: "IEDIB",
+    duration: "2024 - 2025",
+    description: "Focused on learning the basics of big data and artificial intelligence."
+  },
+  {
+    degree: "CFGS Desenvolupemnt d'Aplicacions Web",
+    institution: "CIFP Borja Moll",
+    duration: "2021 - 2023",
+    description: "Focused on learning the basics of web development and programming."
   }
 ];
 
@@ -159,14 +158,14 @@ onMounted(() => {
       </div>
 
       <div class="education-section">
-        <h2>Education</h2>
-        <div class="education-item">
+        <h2>Education & Certifications</h2>
+        <div v-for="edu in education" :key="edu.degree" class="education-item">
           <div class="education-header">
-            <h3>{{ education[0].degree }}</h3>
-            <span class="institution">{{ education[0].institution }}</span>
-            <span class="duration">{{ education[0].duration }}</span>
+            <h3>{{ edu.degree }}</h3>
+            <span class="institution">{{ edu.institution }}</span>
+            <span class="duration">{{ edu.duration }}</span>
           </div>
-          <p>{{ education[0].description }}</p>
+          <p>{{ edu.description }}</p>
         </div>
       </div>
 
