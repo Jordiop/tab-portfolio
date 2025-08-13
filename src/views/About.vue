@@ -1,5 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import IconVue from '@/components/icons/IconVue.vue'
+import IconTypeScript from '@/components/icons/IconTypeScript.vue'
+import IconNuxt from '@/components/icons/IconNuxt.vue'
+import IconTailwind from '@/components/icons/IconTailwind.vue'
+import IconNode from '@/components/icons/IconNode.vue'
+import IconPostgreSQL from '@/components/icons/IconPostgreSQL.vue'
+import IconGit from '@/components/icons/IconGit.vue'
+import IconDocker from '@/components/icons/IconDocker.vue'
 
 const codeLines: Array<{ num: number; content: string; class: string }> = [
   { num: 1, content: '// About.vue - Developer Profile', class: 'comment' },
@@ -7,43 +15,49 @@ const codeLines: Array<{ num: number; content: string; class: string }> = [
   { num: 3, content: 'import { ref, onMounted } from \'vue\'', class: 'keyword' },
   { num: 4, content: '', class: '' },
   { num: 5, content: 'const skills = [', class: 'variable' },
-  { num: 6, content: '  { name: "Vue.js", level: 90 },', class: 'string' },
-  { num: 7, content: '  { name: "TypeScript", level: 85 },', class: 'string' },
-  { num: 8, content: '  { name: "Nuxt.js", level: 80 },', class: 'string' },
-  { num: 9, content: '  { name: "Tailwind CSS", level: 85 },', class: 'string' },
-  { num: 10, content: '  { name: "Node.js", level: 75 },', class: 'string' },
-  { num: 11, content: '  { name: "PostgreSQL", level: 70 },', class: 'string' },
+  { num: 6, content: '  { name: "Vue.js", icon: IconVue },', class: 'string' },
+  { num: 7, content: '  { name: "TypeScript", icon: IconTS },', class: 'string' },
+  { num: 8, content: '  { name: "Nuxt.js", icon: IconNuxt },', class: 'string' },
+  { num: 9, content: '  { name: "Tailwind CSS", icon: IconTailwind },', class: 'string' },
+  { num: 10, content: '  { name: "Node.js", icon: IconNode },', class: 'string' },
+  { num: 11, content: '  { name: "PostgreSQL", icon: IconPostgreSQL },', class: 'string' },
   { num: 12, content: ']', class: 'punctuation' },
   { num: 13, content: '', class: '' },
-  { num: 14, content: 'const experience = [', class: 'variable' },
+  { num: 14, content: 'const experience = [', class: 'variable' }, 
   { num: 15, content: '  {', class: 'punctuation' },
-  { num: 16, content: '    company: "Tech Company",', class: 'string' },
+  { num: 16, content: '    company: "Omniaccess",', class: 'string' },
   { num: 17, content: '    role: "Full Stack Developer",', class: 'string' },
-  { num: 18, content: '    duration: "2022 - Present",', class: 'string' },
-  { num: 19, content: '    description: "Building modern web applications"', class: 'string' },
-  { num: 20, content: '  }', class: 'punctuation' },
-  { num: 21, content: ']', class: 'punctuation' },
-  { num: 22, content: '</>', class: 'keyword' },
-  { num: 23, content: '', class: '' },
-  { num: 24, content: '<template>', class: 'keyword' },
-  { num: 25, content: '  <div class="about-section">', class: 'punctuation' },
-  { num: 26, content: '    <h1>About Me</h1>', class: 'string' },
-  { num: 27, content: '    <p>{{ bio }}</p>', class: 'string' },
-  { num: 28, content: '    <SkillsChart :skills="skills" />', class: 'string' },
-  { num: 29, content: '    <ExperienceTimeline :experience="experience" />', class: 'string' },
-  { num: 30, content: '  </div>', class: 'punctuation' },
-  { num: 31, content: '</template>', class: 'keyword' }
+  { num: 18, content: '    duration: "January 2025 - Present",', class: 'string' },
+  { num: 19, content: '    description: "Working on projects using Nuxt and Vuetify"', class: 'string' },
+  { num: 20, content: '  },', class: 'punctuation' },
+  { num: 21, content: '  {', class: 'punctuation' },
+  { num: 22, content: '    company: "Omniaccess",', class: 'string' },
+  { num: 23, content: '    role: "Junior Full Stack Developer",', class: 'string' },
+  { num: 24, content: '    duration: "June 2023 - December 2024",', class: 'string' },
+  { num: 25, content: '    description: "Maintain and improve web applications"', class: 'string' },
+  { num: 26, content: '  }', class: 'punctuation' },
+  { num: 27, content: ']', class: 'punctuation' },
+  { num: 28, content: '</>', class: 'keyword' },
+  { num: 29, content: '', class: '' },
+  { num: 30, content: '<template>', class: 'keyword' },
+  { num: 31, content: '  <div class="about-section">', class: 'punctuation' },
+  { num: 32, content: '    <h1>About Me</h1>', class: 'string' },
+  { num: 33, content: '    <p>{{ bio }}</p>', class: 'string' },
+  { num: 34, content: '    <SkillsChart :skills="skills" />', class: 'string' },
+  { num: 35, content: '    <ExperienceTimeline :experience="experience" />', class: 'string' },
+  { num: 36, content: '  </div>', class: 'punctuation' },
+  { num: 37, content: '</template>', class: 'keyword' }
 ];
 
 const skills = [
-  { name: "Vue.js", level: 90, color: "#42b883" },
-  { name: "TypeScript", level: 85, color: "#3178c6" },
-  { name: "Nuxt.js", level: 80, color: "#00dc82" },
-  { name: "Tailwind CSS", level: 85, color: "#06b6d4" },
-  { name: "Node.js", level: 75, color: "#339933" },
-  { name: "PostgreSQL", level: 70, color: "#336791" },
-  { name: "Git", level: 85, color: "#f05032" },
-  { name: "Docker", level: 65, color: "#2496ed" }
+  { name: "Vue.js", icon: IconVue, color: "#42b883" },
+  { name: "TypeScript", icon: IconTypeScript, color: "#3178c6" },
+  { name: "Nuxt.js", icon: IconNuxt, color: "#00dc82" },
+  { name: "Tailwind CSS", icon: IconTailwind, color: "#06b6d4" },
+  { name: "Node.js", icon: IconNode, color: "#339933" },
+  { name: "PostgreSQL", icon: IconPostgreSQL, color: "#336791" },
+  { name: "Git", icon: IconGit, color: "#f05032" },
+  { name: "Docker", icon: IconDocker, color: "#2496ed" }
 ];
 
 const experience = [
@@ -118,19 +132,8 @@ onMounted(() => {
         <h2>Skills & Technologies</h2>
         <div class="skills-grid">
           <div v-for="skill in skills" :key="skill.name" class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">{{ skill.name }}</span>
-              <span class="skill-level">{{ skill.level }}%</span>
-            </div>
-            <div class="skill-bar">
-              <div 
-                class="skill-progress" 
-                :style="{ 
-                  width: skill.level + '%', 
-                  backgroundColor: skill.color 
-                }"
-              ></div>
-            </div>
+            <component :is="skill.icon" :fill="skill.color" :size="48" />
+            <span class="skill-name">{{ skill.name }}</span>
           </div>
         </div>
       </div>
@@ -237,6 +240,7 @@ onMounted(() => {
 
 .skills-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
@@ -246,37 +250,25 @@ onMounted(() => {
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.skill-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.75rem;
+.skill-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-light);
+  border-color: var(--accent-color);
 }
 
 .skill-name {
   font-weight: 600;
   color: var(--text-primary);
-}
-
-.skill-level {
+  margin-top: 0.75rem;
   font-size: 0.875rem;
-  color: var(--accent-color);
-  font-weight: 500;
-}
-
-.skill-bar {
-  height: 8px;
-  background: var(--bg-primary);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.skill-progress {
-  height: 100%;
-  border-radius: 4px;
-  transition: width 1s ease;
 }
 
 .timeline {
