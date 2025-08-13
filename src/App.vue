@@ -13,6 +13,8 @@ const navigateTo = (path: string, tab: string) => {
   if (route.path !== path) {
     router.push(path)
     activeTab.value = tab
+  } else {
+    activeTab.value = tab
   }
 }
 
@@ -27,7 +29,6 @@ const toggleTheme = () => {
   }
 }
 
-// Watch for route changes to update active tab
 watch(() => route.path, (newPath) => {
   switch (newPath) {
     case '/':
@@ -48,7 +49,6 @@ onMounted(() => {
   if (isDarkMode.value) document.body.classList.add('dark')
   else document.body.classList.remove('dark')
   
-  // Set initial active tab based on current route
   switch (route.path) {
     case '/':
       activeTab.value = 'Home.vue'
@@ -61,7 +61,6 @@ onMounted(() => {
       break
   }
   
-  // Hide loading after initial mount
   setTimeout(() => {
     isLoading.value = false
   }, 300)
@@ -146,9 +145,7 @@ onMounted(() => {
           </div>
         </div>
         <router-view v-slot="{ Component }">
-          <transition name="fade" mode="out-in" @before-leave="isLoading = true" @after-enter="isLoading = false">
             <component :is="Component" :key="route.path" />
-          </transition>
         </router-view>
       </div>
     </div>

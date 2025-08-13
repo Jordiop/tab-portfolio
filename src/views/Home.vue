@@ -8,7 +8,7 @@ const codeLines: Array<{ num: number; content: string; class: string }> = [
   { num: 4, content: '', class: '' },
   { num: 5, content: 'const name = ref(\'Jordi Osarenkhoe\')', class: 'variable' },
   { num: 6, content: 'const role = ref(\'Full Stack Developer\')', class: 'variable' },
-  { num: 7, content: 'const skills = [', class: 'variable' },
+  { num: 7, content: 'const skills = [', class: 'punctuation' },
   { num: 8, content: '  \'Vue.js\',', class: 'string' },
   { num: 9, content: '  \'Nuxt.js\',', class: 'string' },
   { num: 10, content: '  \'TypeScript\',', class: 'string' },
@@ -88,7 +88,7 @@ const typeWriter = () => {
         <img src="@/assets/images/meirl.jpg" alt="Jordi Osarenkhoe" class="developer-img">
         <div class="image-overlay">
           <div class="overlay-content">
-            <span class="overlay-text">Full Stack Developer</span>
+            <span class="overlay-text">Yap, that's me</span>
           </div>
         </div>
       </div>
@@ -140,9 +140,9 @@ const typeWriter = () => {
 
 .developer-image-container {
   position: relative;
-  width: 200px;
-  height: 200px;
-  margin: 2rem auto;
+  width: 250px;
+  height: 250px;
+  margin-top: 2rem;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: var(--shadow-medium);
