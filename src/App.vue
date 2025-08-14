@@ -8,6 +8,7 @@ const route = useRoute()
 const activeTab = ref('Home.vue')
 const isDarkMode = ref(false)
 const isLoading = ref(true)
+const isCodeEditorVisible = ref(true)
 
 const navigateTo = (path: string, tab: string) => {
   if (route.path !== path) {
@@ -27,6 +28,11 @@ const toggleTheme = () => {
     document.body.classList.remove('dark')
     localStorage.setItem('theme', 'light')
   }
+}
+
+const toggleCodeEditor = () => {
+  isCodeEditorVisible.value = !isCodeEditorVisible.value
+  localStorage.setItem('codeEditorVisible', isCodeEditorVisible.value.toString())
 }
 
 watch(() => route.path, (newPath) => {
@@ -49,6 +55,12 @@ onMounted(() => {
   if (isDarkMode.value) document.body.classList.add('dark')
   else document.body.classList.remove('dark')
   
+  // Load code editor visibility preference
+  const savedCodeEditorVisible = localStorage.getItem('codeEditorVisible')
+  if (savedCodeEditorVisible !== null) {
+    isCodeEditorVisible.value = savedCodeEditorVisible === 'true'
+  }
+  
   switch (route.path) {
     case '/':
       activeTab.value = 'Home.vue'
@@ -60,6 +72,19 @@ onMounted(() => {
       activeTab.value = 'About.vue'
       break
   }
+  
+  // Add keyboard event listener
+  const handleKeydown = (event: KeyboardEvent) => {
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0
+    const modifierKey = isMac ? event.metaKey : event.ctrlKey
+    
+    if (modifierKey && event.key === 'b') {
+      event.preventDefault()
+      toggleCodeEditor()
+    }
+  }
+  
+  document.addEventListener('keydown', handleKeydown)
   
   setTimeout(() => {
     isLoading.value = false
@@ -97,6 +122,11 @@ onMounted(() => {
         </svg>
         <svg v-else xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </div>
+      <div class="sidebar-icon" @click="toggleCodeEditor" :class="{ 'active': !isCodeEditorVisible }" :title="isCodeEditorVisible ? 'Hide Code Editor (Cmd+B)' : 'Show Code Editor (Cmd+B)'">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
         </svg>
       </div>
     </div>
@@ -145,7 +175,7 @@ onMounted(() => {
           </div>
         </div>
         <router-view v-slot="{ Component }">
-            <component :is="Component" :key="route.path" />
+            <component :is="Component" :key="route.path" :isCodeEditorVisible="isCodeEditorVisible" />
         </router-view>
       </div>
     </div>

@@ -9,6 +9,14 @@ import IconPostgreSQL from '@/components/icons/IconPostgreSQL.vue'
 import IconGit from '@/components/icons/IconGit.vue'
 import IconDocker from '@/components/icons/IconDocker.vue'
 
+interface Props {
+  isCodeEditorVisible?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  isCodeEditorVisible: true
+})
+
 const codeLines: Array<{ num: number; content: string; class: string }> = [
   { num: 1, content: '// About.vue - Developer Profile', class: 'comment' },
   { num: 2, content: '< setup lang="ts">', class: 'keyword' },
@@ -102,7 +110,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="code-editor hidden md:block overflow-hidden md:overflow-auto">
+  <div v-if="props.isCodeEditorVisible" class="code-editor hidden md:block overflow-hidden md:overflow-auto">
     <div class="code-content">
       <div class="code-line" v-for="line in codeLines" :key="line.num">
         <div class="line-numbers">{{ line.num }}</div>
@@ -112,7 +120,7 @@ onMounted(() => {
       </div>
     </div>
   </div>
-  <div class="preview">
+  <div class="preview" :class="{ 'full-width': !props.isCodeEditorVisible }">
     <div class="about-content" :class="{ 'visible': isVisible }">
       <div class="about-header">
         <h1>About Me</h1>
@@ -402,6 +410,11 @@ onMounted(() => {
 
 .interest-item svg {
   color: var(--accent-color);
+}
+
+.preview.full-width {
+  width: 100%;
+  margin-left: 0;
 }
 
 @media (max-width: 768px) {

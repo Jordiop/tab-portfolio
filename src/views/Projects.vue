@@ -1,7 +1,64 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const codeLines: Array<{ num: number; content: string; class: string }> = [];
+interface Props {
+  isCodeEditorVisible?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  isCodeEditorVisible: true
+})
+
+const codeLines: Array<{ num: number; content: string; class: string }> = [
+  { num: 1, content: 'const projects = [', class: 'keyword' },
+  { num: 2, content: '  {', class: 'punctuation' },
+  { num: 3, content: '    id: 1,', class: 'string' },
+  { num: 4, content: '    title: "Portfolio",', class: 'string' },
+  { num: 5, content: '    description: "A modern portfolio featuring an original design based on a code editor theme. Built with Vue 3, TypeScript, and Tailwind CSS for a seamless developer experience.",', class: 'string' },
+  { num: 6, content: '    tech: ["Vue 3", "TypeScript", "Tailwind CSS", "Vite"],', class: 'string' },
+  { num: 7, content: '    image: "https://placehold.co/600x400/5e4c7f/e0def4?text=Portfolio",', class: 'string' },
+  { num: 8, content: '    github: "https://github.com/jordiop/tab-portfolio",', class: 'string' },
+  { num: 9, content: '    demo: "https://portfolio.jordi.dev",', class: 'string' },
+  { num: 10, content: '    featured: true', class: 'boolean' },
+  { num: 11, content: '  },', class: 'punctuation' },
+  { num: 12, content: '  {', class: 'punctuation' },
+  { num: 13, content: '    id: 2,', class: 'string' },
+  { num: 14, content: '    title: "Advent JS",', class: 'string' },
+  { num: 15, content: '    description: "Collection of solved Advent of Code exercises and algorithmic challenges. Demonstrates problem-solving skills and clean code practices.",', class: 'string' },
+  { num: 16, content: '    tech: ["JavaScript", "Algorithms", "Data Structures"],', class: 'string' },
+  { num: 17, content: '    image: "https://placehold.co/600x400/5e4c7f/e0def4?text=Advent+JS",', class: 'string' },
+  { num: 18, content: '    github: "https://github.com/jordiop/adventjs",', class: 'string' },
+  { num: 19, content: '    featured: false', class: 'boolean' },
+  { num: 20, content: '  },', class: 'punctuation' },
+  { num: 21, content: '  {', class: 'punctuation' },
+  { num: 22, content: '    id: 3,', class: 'string' },
+  { num: 23, content: '    title: "Newtab Extension",', class: 'string' },
+  { num: 24, content: '    description: "A minimalist Firefox new tab extension that provides a clean, customizable interface for productivity and quick access to frequently used tools.",', class: 'string' },
+  { num: 25, content: '    tech: ["HTML", "CSS", "JavaScript", "Firefox API"],', class: 'string' },
+  { num: 26, content: '    image: "https://placehold.co/600x400/5e4c7f/e0def4?text=New+Tab",', class: 'string' },
+  { num: 27, content: '    github: "https://github.com/jordiop/newtab",', class: 'string' },
+  { num: 28, content: '    featured: false', class: 'boolean' },
+  { num: 29, content: '  },', class: 'punctuation' },
+  { num: 30, content: '  {', class: 'punctuation' },
+  { num: 31, content: '    id: 4,', class: 'string' },
+  { num: 32, content: '    title: "Weather Dashboard",', class: 'string' },
+  { num: 33, content: '    description: "Real-time weather dashboard with location-based forecasts, interactive maps, and beautiful weather visualizations.",', class: 'string' },
+  { num: 34, content: '    tech: ["Vue.js", "OpenWeather API", "Chart.js", "Geolocation"],', class: 'string' },
+  { num: 35, content: '    image: "https://placehold.co/600x400/5e4c7f/e0def4?text=Weather",', class: 'string' },
+  { num: 36, content: '    github: "https://github.com/jordiop/weather-dashboard",', class: 'string' },
+  { num: 37, content: '    demo: "https://weather.jordi.dev",', class: 'string' },
+  { num: 38, content: '    featured: false', class: 'boolean' },
+  { num: 39, content: '  },', class: 'punctuation' },
+  { num: 40, content: ']', class: 'punctuation' },
+  { num: 41, content: '<template>', class: 'keyword' },
+  { num: 42, content: '<div v-if="props.isCodeEditorVisible" class="code-editor hidden md:block overflow-hidden md:overflow-auto">', class: 'keyword' },
+  { num: 43, content: '<div class="code-content">', class: 'keyword' },
+  { num: 44, content: '<div class="code-line" v-for="line in codeLines" :key="line.num">', class: 'keyword' },
+  { num: 45, content: '<div class="line-numbers">{{ line.num }}</div>', class: 'keyword' },
+  { num: 46, content: '<div class="code-text" :class="line.class">', class: 'keyword' },
+  { num: 47, content: '{{ line.content }}', class: 'keyword' },
+  { num: 48, content: '</div>', class: 'keyword' },
+];
 
 const projects = [
   {
@@ -34,26 +91,6 @@ const projects = [
   },
   {
     id: 4,
-    title: "E-commerce Platform",
-    description: "Full-stack e-commerce solution with modern UI, payment integration, and admin dashboard. Built with Vue.js and Node.js.",
-    tech: ["Vue.js", "Node.js", "MongoDB", "Stripe"],
-    image: "https://placehold.co/600x400/5e4c7f/e0def4?text=E-commerce",
-    github: "https://github.com/jordiop/ecommerce",
-    demo: "https://shop.jordi.dev",
-    featured: true
-  },
-  {
-    id: 5,
-    title: "Task Manager",
-    description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.",
-    tech: ["Vue.js", "Socket.io", "Express", "PostgreSQL"],
-    image: "https://placehold.co/600x400/5e4c7f/e0def4?text=Task+Manager",
-    github: "https://github.com/jordiop/task-manager",
-    demo: "https://tasks.jordi.dev",
-    featured: false
-  },
-  {
-    id: 6,
     title: "Weather Dashboard",
     description: "Real-time weather dashboard with location-based forecasts, interactive maps, and beautiful weather visualizations.",
     tech: ["Vue.js", "OpenWeather API", "Chart.js", "Geolocation"],
@@ -72,7 +109,7 @@ const openProject = (projectId: number) => {
 </script>
 
 <template>
-  <div class="code-editor hidden md:block overflow-hidden md:overflow-auto">
+  <div v-if="props.isCodeEditorVisible" class="code-editor hidden md:block overflow-hidden md:overflow-auto">
     <div class="code-content">
       <div class="code-line" v-for="line in codeLines" :key="line.num">
         <div class="line-numbers">{{ line.num }}</div>
@@ -82,7 +119,7 @@ const openProject = (projectId: number) => {
       </div>
     </div>
   </div>
-  <div class="preview">
+  <div class="preview" :class="{ 'full-width': !props.isCodeEditorVisible }">
     <div class="projects-preview">
       <div class="projects-header">
         <h2>My Projects</h2>
@@ -164,6 +201,11 @@ const openProject = (projectId: number) => {
 </template>
 
 <style scoped>
+.preview.full-width {
+  width: 100%;
+  margin-left: 0;
+}
+
 .projects-header {
   text-align: center;
   margin-bottom: 3rem;

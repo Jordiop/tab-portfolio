@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
+interface Props {
+  isCodeEditorVisible?: boolean
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  isCodeEditorVisible: true
+})
+
 const codeLines: Array<{ num: number; content: string; class: string }> = [
   { num: 1, content: '// Home.vue - Developer Portfolio', class: 'comment' },
   { num: 2, content: '<setup lang="ts">', class: 'keyword' },
@@ -59,7 +67,7 @@ const typeWriter = () => {
 }
 </script>
 <template>
-  <div class="code-editor hidden md:block overflow-hidden md:overflow-auto">
+  <div v-if="props.isCodeEditorVisible" class="code-editor hidden md:block overflow-hidden md:overflow-auto">
     <div class="code-content">
       <div class="code-line" v-for="line in codeLines" :key="line.num">
         <div class="line-numbers">{{ line.num }}</div>
@@ -69,7 +77,7 @@ const typeWriter = () => {
       </div>
     </div>
   </div>
-  <div class="preview">
+  <div class="preview" :class="{ 'full-width': !props.isCodeEditorVisible }">
     <div class="hero-section">
       <div class="greeting">
         Hello <span class="hand-emoji">👋</span>, I'm
@@ -128,6 +136,11 @@ const typeWriter = () => {
 </template>
 
 <style scoped>
+.preview.full-width {
+  width: 100%;
+  margin-left: 0;
+}
+
 .cursor {
   animation: blink 1s infinite;
   color: var(--accent-color);
