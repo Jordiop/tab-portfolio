@@ -131,8 +131,8 @@ onMounted(() => {
         </p>
         <p class="bio">
           When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, 
-          or sharing knowledge with the developer community. I believe in writing clean, maintainable code and 
-          staying up-to-date with the latest industry trends.
+          or sharing knowledge with the developer community. 
+          When I'm not coding, I'm probably playing video games or watching videos.
         </p>
       </div>
 
