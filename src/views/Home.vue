@@ -10,20 +10,19 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const codeLines: Array<{ num: number; content: string; class: string }> = [
-  { num: 1, content: '// Home.vue - Developer Portfolio', class: 'comment' },
-  { num: 2, content: '<setup lang="ts">', class: 'keyword' },
-  { num: 3, content: 'import { ref, onMounted } from \'vue\'', class: 'keyword' },
-  { num: 4, content: '', class: '' },
-  { num: 5, content: 'const name = ref(\'Jordi Osarenkhoe\')', class: 'variable' },
-  { num: 6, content: 'const role = ref(\'Full Stack Developer\')', class: 'variable' },
-  { num: 7, content: 'const skills = [', class: 'punctuation' },
-  { num: 8, content: '  \'Vue.js\',', class: 'string' },
-  { num: 9, content: '  \'Nuxt.js\',', class: 'string' },
-  { num: 10, content: '  \'TypeScript\',', class: 'string' },
-  { num: 11, content: '  \'Tailwind CSS\'', class: 'string' },
-  { num: 12, content: ']', class: 'punctuation' },
-  { num: 13, content: '', class: 'keyword' },
-  { num: 14, content: '', class: '' },
+  { num: 1, content: '<script setup lang="ts">', class: 'keyword' },
+  { num: 2, content: 'import { ref, onMounted } from \'vue\'', class: 'keyword' },
+  { num: 3, content: '', class: '' },
+  { num: 4, content: 'const name = ref(\'Jordi Osarenkhoe\')', class: 'variable' },
+  { num: 5, content: 'const role = ref(\'Full Stack Developer\')', class: 'variable' },
+  { num: 6, content: 'const skills = [', class: 'punctuation' },
+  { num: 7, content: '  \'Vue.js\',', class: 'string' },
+  { num: 8, content: '  \'Nuxt.js\',', class: 'string' },
+  { num: 9, content: '  \'TypeScript\',', class: 'string' },
+  { num: 10, content: '  \'Tailwind CSS\'', class: 'string' },
+  { num: 11, content: ']', class: 'punctuation' },
+  { num: 12, content: '</scrpt>', class: 'keyword' },
+  { num: 13, content: '', class: '' },
   { num: 15, content: '<template>', class: 'keyword' },
   { num: 16, content: '  <div class="hero-section">', class: 'punctuation' },
   { num: 17, content: '    <div class="greeting">', class: 'punctuation' },
@@ -102,7 +101,7 @@ const typeWriter = () => {
       </div>
 
       <div class="social-links">
-        <h3>Connect with me</h3>
+        <h4>Connect with me</h4>
         <div class="social-icons">
           <a href="https://www.linkedin.com/in/jordiop/" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>

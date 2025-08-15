@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 const codeLines: Array<{ num: number; content: string; class: string }> = [
   { num: 1, content: '// About.vue - Developer Profile', class: 'comment' },
-  { num: 2, content: '< setup lang="ts">', class: 'keyword' },
+  { num: 2, content: '<script setup lang="ts">', class: 'keyword' },
   { num: 3, content: 'import { ref, onMounted } from \'vue\'', class: 'keyword' },
   { num: 4, content: '', class: '' },
   { num: 5, content: 'const skills = [', class: 'variable' },
@@ -45,7 +45,7 @@ const codeLines: Array<{ num: number; content: string; class: string }> = [
   { num: 25, content: '    description: "Maintain and improve web applications"', class: 'string' },
   { num: 26, content: '  }', class: 'punctuation' },
   { num: 27, content: ']', class: 'punctuation' },
-  { num: 28, content: '</>', class: 'keyword' },
+  { num: 28, content: '</scrpt>', class: 'keyword' },
   { num: 29, content: '', class: '' },
   { num: 30, content: '<template>', class: 'keyword' },
   { num: 31, content: '  <div class="about-section">', class: 'punctuation' },
