@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { createLines } from '@/composables/createLines'
 import IconVue from '@/components/icons/IconVue.vue'
 import IconTypeScript from '@/components/icons/IconTypeScript.vue'
 import IconNuxt from '@/components/icons/IconNuxt.vue'
@@ -17,45 +18,45 @@ const props = withDefaults(defineProps<Props>(), {
   isCodeEditorVisible: true
 })
 
-const codeLines: Array<{ num: number; content: string; class: string }> = [
-  { num: 1, content: '// About.vue - Developer Profile', class: 'comment' },
-  { num: 2, content: '<script setup lang="ts">', class: 'keyword' },
-  { num: 3, content: 'import { ref, onMounted } from \'vue\'', class: 'keyword' },
-  { num: 4, content: '', class: '' },
-  { num: 5, content: 'const skills = [', class: 'variable' },
-  { num: 6, content: '  { name: "Vue.js", icon: IconVue },', class: 'string' },
-  { num: 7, content: '  { name: "TypeScript", icon: IconTS },', class: 'string' },
-  { num: 8, content: '  { name: "Nuxt.js", icon: IconNuxt },', class: 'string' },
-  { num: 9, content: '  { name: "Tailwind CSS", icon: IconTailwind },', class: 'string' },
-  { num: 10, content: '  { name: "Node.js", icon: IconNode },', class: 'string' },
-  { num: 11, content: '  { name: "PostgreSQL", icon: IconPostgreSQL },', class: 'string' },
-  { num: 12, content: ']', class: 'punctuation' },
-  { num: 13, content: '', class: '' },
-  { num: 14, content: 'const experience = [', class: 'variable' }, 
-  { num: 15, content: '  {', class: 'punctuation' },
-  { num: 16, content: '    company: "Omniaccess",', class: 'string' },
-  { num: 17, content: '    role: "Full Stack Developer",', class: 'string' },
-  { num: 18, content: '    duration: "January 2025 - Present",', class: 'string' },
-  { num: 19, content: '    description: "Working on projects using Nuxt and Vuetify"', class: 'string' },
-  { num: 20, content: '  },', class: 'punctuation' },
-  { num: 21, content: '  {', class: 'punctuation' },
-  { num: 22, content: '    company: "Omniaccess",', class: 'string' },
-  { num: 23, content: '    role: "Junior Full Stack Developer",', class: 'string' },
-  { num: 24, content: '    duration: "June 2023 - December 2024",', class: 'string' },
-  { num: 25, content: '    description: "Maintain and improve web applications"', class: 'string' },
-  { num: 26, content: '  }', class: 'punctuation' },
-  { num: 27, content: ']', class: 'punctuation' },
-  { num: 28, content: '</scrpt>', class: 'keyword' },
-  { num: 29, content: '', class: '' },
-  { num: 30, content: '<template>', class: 'keyword' },
-  { num: 31, content: '  <div class="about-section">', class: 'punctuation' },
-  { num: 32, content: '    <h1>About Me</h1>', class: 'string' },
-  { num: 33, content: '    <p>{{ bio }}</p>', class: 'string' },
-  { num: 34, content: '    <SkillsChart :skills="skills" />', class: 'string' },
-  { num: 35, content: '    <ExperienceTimeline :experience="experience" />', class: 'string' },
-  { num: 36, content: '  </div>', class: 'punctuation' },
-  { num: 37, content: '</template>', class: 'keyword' }
-];
+const codeLines = createLines([
+  { content: '// About.vue - Developer Profile', class: 'comment' },
+  { content: '<script setup lang="ts">', class: 'keyword' },
+  { content: 'import { ref, onMounted } from \'vue\'', class: 'keyword' },
+  '',
+  { content: 'const skills = [', class: 'variable' },
+  { content: '  { name: "Vue.js", icon: IconVue },', class: 'string' },
+  { content: '  { name: "TypeScript", icon: IconTS },', class: 'string' },
+  { content: '  { name: "Nuxt.js", icon: IconNuxt },', class: 'string' },
+  { content: '  { name: "Tailwind CSS", icon: IconTailwind },', class: 'string' },
+  { content: '  { name: "Node.js", icon: IconNode },', class: 'string' },
+  { content: '  { name: "PostgreSQL", icon: IconPostgreSQL },', class: 'string' },
+  { content: ']', class: 'punctuation' },
+  '',
+  { content: 'const experience = [', class: 'variable' },
+  { content: '  {', class: 'punctuation' },
+  { content: '    company: "Omniaccess",', class: 'string' },
+  { content: '    role: "Full Stack Developer",', class: 'string' },
+  { content: '    duration: "January 2025 - Present",', class: 'string' },
+  { content: '    description: "Working on projects using Nuxt and Vuetify"', class: 'string' },
+  { content: '  },', class: 'punctuation' },
+  { content: '  {', class: 'punctuation' },
+  { content: '    company: "Omniaccess",', class: 'string' },
+  { content: '    role: "Junior Full Stack Developer",', class: 'string' },
+  { content: '    duration: "June 2023 - December 2024",', class: 'string' },
+  { content: '    description: "Maintain and improve web applications"', class: 'string' },
+  { content: '  }', class: 'punctuation' },
+  { content: ']', class: 'punctuation' },
+  { content: '</.script>', class: 'keyword' },
+  '',
+  { content: '<template>', class: 'keyword' },
+  { content: '  <div class="about-section">', class: 'punctuation' },
+  { content: '    <h1>About Me</h1>', class: 'string' },
+  { content: '    <p>{{ bio }}</p>', class: 'string' },
+  { content: '    <SkillsChart :skills="skills" />', class: 'string' },
+  { content: '    <ExperienceTimeline :experience="experience" />', class: 'string' },
+  { content: '  </div>', class: 'punctuation' },
+  { content: '</template>', class: 'keyword' },
+])
 
 const skills = [
   { name: "Vue.js", icon: IconVue, color: "#42b883" },
@@ -125,14 +126,13 @@ onMounted(() => {
       <div class="about-header">
         <h1>About Me</h1>
         <p class="bio">
-          I'm a passionate Full Stack Developer with over 2 years of experience building modern web applications. 
+          I'm a passionate Full Stack Developer with over 3 years of experience building modern web applications. 
           I specialize in Vue.js, TypeScript, and Node.js, creating efficient and scalable solutions that deliver 
           exceptional user experiences.
         </p>
         <p class="bio">
-          When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, 
-          or sharing knowledge with the developer community. 
-          When I'm not coding, I'm probably playing video games or watching videos.
+          When I'm not coding, you can find me exploring new technologies, reading books, or watching videos.
+          I also like cars, with a big love for 90s Japanese cars.
         </p>
       </div>
 

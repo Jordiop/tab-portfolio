@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { createLines } from '@/composables/createLines'
+import { useProjects } from '@/composables/useProjects'
 
 interface Props {
   isCodeEditorVisible?: boolean
@@ -9,92 +11,39 @@ const props = withDefaults(defineProps<Props>(), {
   isCodeEditorVisible: true
 })
 
-const codeLines: Array<{ num: number; content: string; class: string }> = [
-  { num: 1, content: '<script setup lang="ts">', class: 'keyword' },
-  { num: 2, content: 'const projects = [', class: 'keyword' },
-  { num: 3, content: '  {', class: 'punctuation' },
-  { num: 4, content: '    id: 1,', class: 'string' },
-  { num: 5, content: '    title: "Portfolio",', class: 'string' },
-  { num: 6, content: '    description: "A modern portfolio featuring an original design based on a code editor theme. Built with Vue 3, TypeScript, and Tailwind CSS for a seamless developer experience.",', class: 'string' },
-  { num: 7, content: '    tech: ["Vue 3", "TypeScript", "Tailwind CSS", "Vite"],', class: 'string' },
-  { num: 8, content: '    image: "https://placehold.co/600x400/5e4c7f/e0def4?text=Portfolio",', class: 'string' },
-  { num: 9, content: '    github: "https://github.com/jordiop/tab-portfolio",', class: 'string' },
-  { num: 10, content: '    demo: "https://portfolio.jordi.dev",', class: 'string' },
-  { num: 11, content: '    featured: true', class: 'boolean' },
-  { num: 12, content: '  },', class: 'punctuation' },
-  { num: 13, content: '  {', class: 'punctuation' },
-  { num: 14, content: '    id: 2,', class: 'string' },
-  { num: 15, content: '    title: "Advent JS",', class: 'string' },
-  { num: 16, content: '    description: "Collection of solved Advent of Code exercises and algorithmic challenges. Demonstrates problem-solving skills and clean code practices.",', class: 'string' },
-  { num: 17, content: '    tech: ["JavaScript", "Algorithms", "Data Structures"],', class: 'string' },
-  { num: 18, content: '    image: "https://placehold.co/600x400/5e4c7f/e0def4?text=Advent+JS",', class: 'string' },
-  { num: 19, content: '    github: "https://github.com/jordiop/adventjs",', class: 'string' },
-  { num: 20, content: '    featured: false', class: 'boolean' },
-  { num: 21, content: '  },', class: 'punctuation' },
-  { num: 22, content: '  {', class: 'punctuation' },
-  { num: 23, content: '    id: 3,', class: 'string' },
-  { num: 24, content: '    title: "Newtab Extension",', class: 'string' },
-  { num: 25, content: '    description: "A minimalist Firefox new tab extension that provides a clean, customizable interface for productivity and quick access to frequently used tools.",', class: 'string' },
-  { num: 25, content: '    tech: ["HTML", "CSS", "JavaScript", "Firefox API"],', class: 'string' },
-  { num: 26, content: '    image: "https://placehold.co/600x400/5e4c7f/e0def4?text=New+Tab",', class: 'string' },
-  { num: 27, content: '    github: "https://github.com/jordiop/newtab",', class: 'string' },
-  { num: 28, content: '    featured: false', class: 'boolean' },
-  { num: 29, content: '  }', class: 'punctuation' },
-  { num: 30, content: ']', class: 'punctuation' },
-  { num: 31, content: '</scrpt>', class: 'keyword' },
-  { num: 32, content: '', class: 'space' },
-  { num: 33, content: '<template>', class: 'keyword' },
-  { num: 34, content: ' <div v-if="props.isCodeEditorVisible" class="code-editor hidden md:block overflow-hidden md:overflow-auto">', class: 'punctuation' },
-  { num: 35, content: '   <div class="code-content">', class: 'punctuation' },
-  { num: 36, content: '     <div class="code-line" v-for="line in codeLines" :key="line.num">', class: 'punctuation' },
-  { num: 37, content: '       <div class="line-numbers">{{ line.num }}</div>', class: 'punctuation' },
-  { num: 38, content: '         <div class="code-text" :class="line.class">', class: 'punctuation' },
-  { num: 39, content: '           {{ line.content }}', class: 'keyword' },
-  { num: 40, content: '         </div>', class: 'punctuation' },
-  { num: 41, content: '       </div>', class: 'punctuation' },
-  { num: 42, content: '     </div>', class: 'punctuation' },
-  { num: 43, content: '   </div>', class: 'punctuation' },
-  { num: 44, content: ' </div>', class: 'punctuation' },
-  { num: 45, content: '</template>', class: 'keyword' },
-  { num: 46, content: '', class: 'space' },
-];
+const router = useRouter()
+const { getAllProjects } = useProjects()
+const projects = getAllProjects()
 
-const projects = [
-  {
-    id: 1,
-    title: "Portfolio",
-    description: "A modern portfolio featuring an original design based on a code editor theme. Built with Vue 3, TypeScript, and Tailwind CSS for a seamless developer experience.",
-    tech: ["Vue 3", "TypeScript", "Tailwind CSS", "Vite"],
-    image: "https://placehold.co/600x400/5e4c7f/e0def4?text=Portfolio",
-    github: "https://github.com/jordiop/tab-portfolio",
-    demo: "https://jordiop.com",
-    featured: true
-  },
-  {
-    id: 2,
-    title: "Advent JS",
-    description: "Collection of solved Advent of Code exercises and algorithmic challenges. Demonstrates problem-solving skills and clean code practices.",
-    tech: ["JavaScript", "Algorithms", "Data Structures"],
-    image: "https://placehold.co/600x400/5e4c7f/e0def4?text=Advent+JS",
-    github: "https://github.com/Jordiop/adventjs",
-    featured: false
-  },
-  {
-    id: 3,
-    title: "Newtab Extension",
-    description: "A minimalist Chrome new tab extension that provides a clean, customizable interface for productivity and quick access to frequently used tools.",
-    tech: ["HTML", "CSS", "JavaScript", "Chrome API"],
-    image: "https://placehold.co/600x400/5e4c7f/e0def4?text=New+Tab",
-    github: "https://github.com/Jordiop/newtab",
-    featured: false
-  }
-];
-
-const selectedProject = ref<number | null>(null);
+const codeLines = createLines([
+  { content: '<script setup lang="ts">', class: 'keyword' },
+  { content: 'import { useRouter } from \'vue-router\'', class: 'keyword' },
+  { content: 'import { useProjects } from \'@/composables/useProjects\'', class: 'keyword' },
+  '',
+  { content: 'const router = useRouter()', class: 'variable' },
+  { content: 'const { getAllProjects } = useProjects()', class: 'variable' },
+  { content: 'const projects = getAllProjects()', class: 'variable' },
+  '',
+  { content: 'const openProject = (id: number) => {', class: 'variable' },
+  { content: '  router.push(`/projects/${id}`)', class: 'string' },
+  { content: '}', class: 'punctuation' },
+  { content: '</.script>', class: 'keyword' },
+  '',
+  { content: '<template>', class: 'keyword' },
+  { content: '  <div class="projects-grid">', class: 'punctuation' },
+  { content: '    <ProjectCard', class: 'punctuation' },
+  { content: '      v-for="project in projects"', class: 'string' },
+  { content: '      :key="project.id"', class: 'string' },
+  { content: '      :project="project"', class: 'string' },
+  { content: '      @click="openProject(project.id)"', class: 'string' },
+  { content: '    />', class: 'punctuation' },
+  { content: '  </div>', class: 'punctuation' },
+  { content: '</template>', class: 'keyword' },
+])
 
 const openProject = (projectId: number) => {
-  selectedProject.value = projectId;
-};
+  router.push(`/projects/${projectId}`)
+}
 </script>
 
 <template>
@@ -122,6 +71,10 @@ const openProject = (projectId: number) => {
           class="project-card"
           :class="{ 'featured': project.featured }"
           @click="openProject(project.id)"
+          role="button"
+          tabindex="0"
+          @keyup.enter="openProject(project.id)"
+          @keyup.space="openProject(project.id)"
         >
           <div class="project-image">
             <img :src="project.image" :alt="project.title">

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { createLines } from '@/composables/createLines'
 
 interface Props {
   isCodeEditorVisible?: boolean
@@ -9,34 +10,35 @@ const props = withDefaults(defineProps<Props>(), {
   isCodeEditorVisible: true
 })
 
-const codeLines: Array<{ num: number; content: string; class: string }> = [
-  { num: 1, content: '<script setup lang="ts">', class: 'keyword' },
-  { num: 2, content: 'import { ref, onMounted } from \'vue\'', class: 'keyword' },
-  { num: 3, content: '', class: '' },
-  { num: 4, content: 'const name = ref(\'Jordi Osarenkhoe\')', class: 'variable' },
-  { num: 5, content: 'const role = ref(\'Full Stack Developer\')', class: 'variable' },
-  { num: 6, content: 'const skills = [', class: 'punctuation' },
-  { num: 7, content: '  \'Vue.js\',', class: 'string' },
-  { num: 8, content: '  \'Nuxt.js\',', class: 'string' },
-  { num: 9, content: '  \'TypeScript\',', class: 'string' },
-  { num: 10, content: '  \'Tailwind CSS\'', class: 'string' },
-  { num: 11, content: ']', class: 'punctuation' },
-  { num: 12, content: '</scrpt>', class: 'keyword' },
-  { num: 13, content: '', class: '' },
-  { num: 15, content: '<template>', class: 'keyword' },
-  { num: 16, content: '  <div class="hero-section">', class: 'punctuation' },
-  { num: 17, content: '    <div class="greeting">', class: 'punctuation' },
-  { num: 18, content: '      Hello <span>👋</span>, I\'m', class: 'string' },
-  { num: 19, content: '    </div>', class: 'punctuation' },
-  { num: 20, content: '    <h1 class="name">{{ name }}</h1>', class: 'string' },
-  { num: 21, content: '    <div class="tagline">', class: 'punctuation' },
-  { num: 22, content: '      I Fix, Optimize & Build', class: 'string' },
-  { num: 23, content: '      <span class="highlight">Nuxt.js</span> &', class: 'string' },
-  { num: 24, content: '      <span class="highlight-react">Vue.js</span> Apps', class: 'string' },
-  { num: 25, content: '    </div>', class: 'punctuation' },
-  { num: 26, content: '  </div>', class: 'punctuation' },
-  { num: 27, content: '</template>', class: 'keyword' },
-];
+const codeLines = createLines([
+  { content: '<script setup lang="ts">', class: 'keyword' },
+  { content: 'import { ref, onMounted } from \'vue\'', class: 'keyword' },
+  '',
+  { content: 'const name = ref(\'Jordi Osarenkhoe\')', class: 'variable' },
+  { content: 'const role = ref(\'Full Stack Developer\')', class: 'variable' },
+  { content: 'const skills = [', class: 'punctuation' },
+  { content: '  \'Vue.js\',', class: 'string' },
+  { content: '  \'Nuxt.js\',', class: 'string' },
+  { content: '  \'TypeScript\',', class: 'string' },
+  { content: '  \'Tailwind CSS\'', class: 'string' },
+  { content: '  \'Vuetify\'', class: 'string' },
+  { content: ']', class: 'punctuation' },
+  { content: '</.script>', class: 'keyword' },
+  '',
+  { content: '<template>', class: 'keyword' },
+  { content: '  <div class="hero-section">', class: 'punctuation' },
+  { content: '    <div class="greeting">', class: 'punctuation' },
+  { content: '      Hello <span>👋</span>, I\'m', class: 'string' },
+  { content: '    </div>', class: 'punctuation' },
+  { content: '    <h1 class="name">{{ name }}</h1>', class: 'string' },
+  { content: '    <div class="tagline">', class: 'punctuation' },
+  { content: '      I Fix, Optimize & Build', class: 'string' },
+  { content: '      <span class="highlight">Nuxt.js</span> &', class: 'string' },
+  { content: '      <span class="highlight-react">Vue.js</span> Apps', class: 'string' },
+  { content: '    </div>', class: 'punctuation' },
+  { content: '  </div>', class: 'punctuation' },
+  { content: '</template>', class: 'keyword' },
+])
 
 const isTyping = ref(false)
 const typedText = ref('')
